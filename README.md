@@ -1,1 +1,13 @@
-# DeforestationDetection by Theodore Ruf, Smart System engineering student #
+'Deforestation detection by Theodore Ruf, Smart System engineering student. Original file is located at https://colab.research.google.com/drive142XiiXOko5VDq93Y5DF3GKaOo6MoUclm'
+
+L’idée était de récupérer deux images de zones géographiques identiques mais à des temporalités différentes. Utiliser le modèle entrainé pour réaliser une prédiction sur ces dernières de sorte à obtenir les cartes de segmentations afin de les comparer pour conclure s’il y a eu déforestation ou non. 
+
+L'ensemble de données utilisé pour la segmentation des zones forestières contient un total de 5108 paires image-masque. Outre les données relatives aux images et aux masques, le jeu de données comprend également un fichier CSV qui représente le nom du fichier de l'image par rapport au nom du fichier du masque. Ce fichier peut être utilisé pour charger efficacement les données et faire correspondre les images avec leurs masques respectifs pendant la formation et l'évaluation. Base de donnée accessible à : « Forest Aerial Segmentation with UNet ». https://kaggle.com/code/utkarshsaxenadn/forest-aerial-segmentation-with-unet.
+
+Le réseau de neurones est basé sur une architecture U-Net (Réseau de neurones à convolution), connue pour ses performances en termes de segmentation d'images. Schéma de l'architecture U-Net à : https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/
+  
+Dans ce projet, nous avons atteint un taux d’accuracy à presque 90% tandis que dans la littérature il a été de plus de 99%. Nous sommes encore un peu loin du compte, toutefois les résultats que nous avons obtenus jusqu’ici étaient largement satisfaisants et exploitables. Cela me rend optimiste dans l’idée où l’apprentissage peut encore être améliorée, surtout au niveau du reseau de neuronne. Voici un exemple de prédiction du modele :
+![prediction 1200 img with dropout 5epoch](https://github.com/Theodoreruf/DeforestationDetection/assets/122580490/c1e995ac-71e7-4f26-8f27-f0d5bc2d207d)
+
+Il est important de noter qu'il y a également une incohérence dans l'étiquetage des images de cet ensemble de données. Plus précisément, les forêts, ou les arbres dans l'image, ne sont pas toujours étiquetés correctement. Par conséquent, les performances du modèle formé sur cet ensemble de données peuvent être affectées. Parfois, la sortie du modèle peut ne pas correspondre à la sortie étiquetée. Cependant, dans de nombreux cas, le résultat du modèle est bien meilleur que le résultat étiqueté, car le modèle apprend à produire un masque sur tous les arbres connectés ou groupés, alors que les étiquettes humaines ne sont pas toujours exactes (voir image ci-dessous).
+![Exemple images dataset imprecision](https://github.com/Theodoreruf/DeforestationDetection/assets/122580490/26a44601-4f16-4d6a-8391-642eb85f171a)
